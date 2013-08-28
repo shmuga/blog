@@ -1,0 +1,18 @@
+include_once 'config.php';
+Site::header();
+$post=new Posts();
+$post->theme_id=24;
+$post->showPostThemeId();
+if (isset($_GET['p']))
+	$rez=$post->getPosts($_GET['p']);
+else
+	$rez=$post->getPosts();	
+foreach ($rez as $key => $value) {
+	echo $value['title']."<br>";
+}
+?>
+<div>
+<?
+echo Site::pagination();
+echo "</div>";
+Site::footer();

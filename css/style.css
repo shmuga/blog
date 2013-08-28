@@ -1,0 +1,110 @@
+body{
+	min-width: 480px;
+}
+.head_text{
+	text-align: center;
+
+}
+
+
+.row{
+	/*background:#FCEBB6;*/
+}
+
+.arrow{
+	font-size: 30px;
+	text-align: center;
+}
+
+
+.post_date{
+	color: #7E7E7E;
+    font-size: 11px;
+    margin-bottom: 2px;
+}
+
+.post_text{
+	text-align: justify;
+}
+
+.post{
+	border-bottom: 2px solid;
+	padding-bottom: 10px;
+	margin-bottom: 30px;
+}
+
+.post_title{
+	text-decoration: none;
+	font-size: 27px;
+}
+
+.topic{
+	margin-left: -20px;
+}
+
+.topic_title{
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.topic_name > a{
+	text-decoration: none;
+	font-size: 18px;
+}
+
+ul{
+	list-style-type: none;
+}
+
+.date{
+	width: 100%;
+}
+
+.date_day{
+	color: #3498db;
+	font-size: 50px;
+
+}
+
+.date_month{
+	color: #1abc9c;
+	font-size: 30px;
+}
+
+.date_year{
+	color: #f1c40f;
+	font-size: 20px;
+}
+
+.date{
+	/*text-align: cente;*/
+	margin-left: -20px;
+}
+
+.spacer{
+	height: 40px;
+}
+
+.wspacer30{
+	width: 30px;
+}
+
+.blue{
+	color: #3498db;
+}
+
+.blue > a {
+	color: #34495e;
+}
+
+.overall{
+	z-index: 10;
+	position: absolute;
+	opacity:0.4;
+	filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+
+.overall:hover{
+	opacity: 1;
+	filter: alpha(opacity=100); /* For IE8 and earlier */
+}
