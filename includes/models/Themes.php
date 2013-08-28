@@ -78,7 +78,7 @@ class Themes
 	{
 		$rez = mysql_query("SELECT COUNT(*) AS numrows FROM `posts` WHERE `theme_id` = \"$this->id\"");		
 		$rez=mysql_fetch_row($rez);
-		return $rez[1];
+		return $rez[0];
 	}
 
 }

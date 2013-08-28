@@ -167,7 +167,7 @@ class Posts
 	{
 		$rez = mysql_query("SELECT COUNT(*) AS numrows FROM `posts` WHERE `show` = \"1\"");		
 		$rez = mysql_fetch_row($rez);
-		return $rez[1];
+		return $rez[0];
 	}
 	//
 	//return an array of posts including paging
