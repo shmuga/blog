@@ -1,4 +1,4 @@
-<?php
+	<?php
 class Themes
 {
 	public $id;
@@ -77,7 +77,8 @@ class Themes
 	public function countPostsWithTheme()
 	{
 		$rez = mysql_query("SELECT COUNT(*) AS numrows FROM `posts` WHERE `theme_id` = \"$this->id\"");		
-		return mysql_fetch_row($rez)[0];
+		$rez=mysql_fetch_row($rez);
+		return $rez[1];
 	}
 
 }
