@@ -12,7 +12,7 @@ class DataBase
 	{
 		$this->hostname="localhost";
 		$this->username="root";
-		$this->password="";
+		$this->password="16481657=vfhr=!";
 
 		$this->base="blog";
 

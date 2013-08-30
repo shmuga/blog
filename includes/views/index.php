@@ -7,7 +7,7 @@
 				$output = "<div class='post'>";
 				$output .= "<p class='post_date'> post was created " . $value['date_created'] . " by Mark </p>";
 				$output .= "<p>"
-						. "<a class='post_title' href='index.php?r=Site/post&postid=" . $value['post_id'] . "'"
+						. "<a class='post_title' href='index.php?r=Site/post&post_id=" . $value['post_id'] . "'"
 						. "<h3 class='post_title'>" . $value['title'] . "</h3>"
 						. "</a>"
 						. "</p>";				
