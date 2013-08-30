@@ -11,7 +11,7 @@
 						. "<h3 class='post_title'>" . $post['title'] . "</h3>"
 						. "</a>"
 						. "</p>";				
-				$text=explode("<span class=\"cut\"></span>",$post['text']);			
+				$text=explode("***cut***",$post['text']);			
 				$output .= "<p class='post_text'> " . $text[0] . $text[1] . "</p>";
 				$output .= "</div>";
 				echo $output;

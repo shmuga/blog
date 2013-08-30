@@ -21,18 +21,26 @@ function __autoload($class_name) {
 
         include ($file);
 }
-//
+
 //creating registry
 $registry = new Registry;
 //
+
 //connect database
 $db = new Database();
 $registry['db'] = $db;
 //
+
 //creating templater
 $template=new Template($registry);
-$registry['template']=$template;
+$registry['template'] = $template;
 //
+
+//creating session class
+$session=new Session($registry);
+$registry['session'] = $session;
+//
+
 //creating router and adding pass to controllers , start delegate
 $router = new Router($registry);
 $registry['router'] = $router;

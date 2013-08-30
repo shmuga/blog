@@ -11,7 +11,7 @@
 						. "<h3 class='post_title'>" . $value['title'] . "</h3>"
 						. "</a>"
 						. "</p>";				
-				$text=explode("<span class=\"cut\"></span>",$value['text']);			
+				$text=explode("***cut***",$value['text']);			
 				$output .= "<p class='post_text'> " . $text[0] . "</p>";
 				$output .= "<p><a class='btn btn-inverse' href='index.php?r=Site/post&post_id=" . $value['post_id'] 
 						. "'>Continue reading this article -></a></p>";

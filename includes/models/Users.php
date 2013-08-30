@@ -23,11 +23,15 @@ class Users
 
 	public function validate()
 	{
-		if ($rez = $this->exist)
+		if ($rez = $this->exist())
 		{
+			$rez = mysql_query("SELECT * FROM `users` WHERE `login`=\"" . $this->login . "\"");
 			$rez = mysql_fetch_array($rez);
 			if ($this->password === $rez[2])
+			{
+				$this->id=$rez[0];
 				return true;
+			}				
 			else return false;
 		}
 		else return false;

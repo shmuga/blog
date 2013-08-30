@@ -54,6 +54,11 @@ class Template
 		include('main/header.php');
 	}
 
+	public function headerAdmin()
+	{
+		include('main/header_admin.php');
+	}
+
 	public function footer()
 	{
 		include('main/footer.php');

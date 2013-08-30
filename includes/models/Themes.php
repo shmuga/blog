@@ -14,15 +14,15 @@ class Themes
 	public function exist()	
 	{
 		if ($this->validate())
-		{
-			$rez = mysql_query("SELECT * FROM `themes` WHERE `name` = \"{$this->theme}\"");		
+		{			
+			$rez = mysql_query("SELECT * FROM `themes` WHERE `name` = \"{$this->theme}\"");					
 			if ($rez)
-				if (mysql_num_rows($rez))
-				{					
+				if (!mysql_num_rows($rez))
+				{									
 					return true;
 				}
 				else
-				{
+				{									
 					return false;
 				}
 			else return false;
@@ -31,9 +31,10 @@ class Themes
 
 	public function createTheme()
 	{		
-		if (!$this->exist())
-		{				
-			mysql_query("INSERT INTO `themes`(`name`) VALUES(\"{$this->theme}\")");
+
+		if ($this->exist())
+		{			
+			mysql_query("INSERT INTO `themes`(`name`) VALUES(\"{$this->theme}\")");		
 		}
 		else return false;
 	}
@@ -41,26 +42,22 @@ class Themes
 		
 	public function deleteTheme()
 	{
-		if ($this->exist())
+		if ($this->id)
 		{
-			mysql_query("DELETE FROM `themes` WHERE `name` = \"{$this->theme}\"");
+			mysql_query("DELETE FROM `themes` WHERE `id` = \"{$this->id}\"");
 			mysql_query("UPDATE `posts` SET `theme_id` = \"0\" WHERE `theme_id` = \"{$this->id}\"");
 		}
 		else return false;
 	}
 
 	public function readAllThemes()
-	{
-		if ($this->validate())
-		{
+	{		
 			$result = mysql_query("SELECT * FROM `themes`");
 			while ($row = mysql_fetch_assoc($result)) 
 			{		
 				$items[] = $row;			
 			}
 			return $items;
-		}
-		else return false;
 	}
 
 	public function readThemeByName()

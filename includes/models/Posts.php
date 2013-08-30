@@ -7,9 +7,8 @@ class Posts
 	public $text;
 	public $date_created;
 	public $show;
-	//for tags and theme name input
+	//for theme name input
 	public $theme_name;
-	public $tags;
 	//
 
 	//validation of input data
@@ -31,6 +30,7 @@ class Posts
 		$theme->theme = $this->theme_name;
 		$theme->readThemeByName();
 		$this->theme_id = $theme->id;		
+		$this->text = mysql_real_escape_string($this->text);
 		//
 		//validating and creating row in posts table
 		if ($this->validate() || $this->theme_id !== "")
@@ -44,15 +44,6 @@ class Posts
 			//
 		}
 		//
-		//for each tag creating row in table tags and put there id of this post
-		foreach ($this->tags as $key => $value) 
-		{
-			$tag = new Tags();
-			$tag->post_id = $this->post_id;
-			$tag->tag = $value;
-			$tag->createTag();			
-		}
-		//
 	}
 
 	public function deletePost()
@@ -60,45 +51,28 @@ class Posts
 		//deleting post and all tags connected with it
 		if ($this->post_id !== "")
 		{		
-			mysql_query("DELETE FROM `tags` WHERE `post_id` = \"{$this->post_id}\"");
 			mysql_query("DELETE FROM `posts` WHERE `post_id` = \"{$this->post_id}\"");
 		}
 		//
 	}
 
-	// public function updatePost($theme_name,$tags)
-	// {	
-	// 	//getting theme id from base by it's name
-	// 	$theme=new Themes();
-	// 	$theme->theme=$theme_name;
-	// 	$theme->readThemeByName();
-	// 	$this->theme_id=$theme->id;		
-	// 	//
-	// 	//deleting all tags by post_id and updating row after creating new tags
-	// 	if ($this->post_id!==""||$this->theme_id!=="")
-	// 	{
-	// 		//deleting tags
-	// 		$tag=new Tags();
-	// 		$tag->post_id=$this->post_id;
-	// 		$tag->deleteTagByPostId();
-	// 		//
-	// 		//updating row
-	// 		mysql_query("UPDATE `posts` SET `theme_id`=\"{$this->theme_id}\","
-	// 		."`title`=\"{$this->title}\",`text`=\"{$this->text}\","
-	// 			."`show`=\"{$this->show}\"");
-	// 		//
-	// 		//creating new tags
-	// 		foreach ($tags as $key => $value) 
-	// 		{
-	// 			$tag=new Tags();
-	// 			$tag->post_id=$this->post_id;
-	// 			$tag->tag=$value;
-	// 			$tag->createTag();			
-	// 		}
-	// 		//
-	// 	}
-	// 	//
-	// }
+	public function updatePost()
+	{	
+		//getting theme id from base by it's name
+		$theme=new Themes();
+		$theme->theme=$this->theme_name;
+		$theme->readThemeByName();
+		$this->theme_id=$theme->id;		
+		$this->text = mysql_real_escape_string($this->text);
+		//
+		if ($this->post_id!==""||$this->theme_id!=="")
+		{
+			//updating row
+			mysql_query("UPDATE `posts` SET `theme_id`=\"{$this->theme_id}\","
+			."`title`=\"{$this->title}\",`text`=\"{$this->text}\" WHERE `post_id`={$this->post_id}");
+			//
+		}
+	}
 
 	//return all post info in one array
 	public function getAllPostAsArray()
@@ -140,26 +114,15 @@ class Posts
 	}
 	//
 	
-	// such as showPostThemeId but with tags
-	public function showPostTag($tag)
-	{
-		$tags = new Tags();
-		$tags->tag = $tag;
-		$tags = $tags->readTagByName();	
-		if ($this->validate() || $tags)
-		{
-			mysql_query("UPDATE `posts` SET `show` = \"0\"");
-			while ($row = mysql_fetch_array($tags))
-			{				
-				mysql_query("UPDATE `posts` SET `show` = \"1\" WHERE `post_id` = \"{$row[1]}\"");
-			}		
-		}
-	}
-	//
 	//make show=1 in that posts we need to see
 	public function showAll()
 	{
 		mysql_query("UPDATE `posts` SET `show` = 1");
+	}
+
+	public function hideAll()
+	{
+		mysql_query("UPDATE `posts` SET `show` = 0");
 	}
 	//
 	//count all the posts
@@ -194,5 +157,26 @@ class Posts
 		return $items;
 	}
 	//
+
+	public function search($query)
+	{
+		$query = trim($query); 
+    	$query = mysql_real_escape_string($query);
+    	$query = htmlspecialchars($query);
+
+	    if (!empty($query)) 
+	    { 
+	        if (strlen($query) < 3) {
+	            $this->hideAll();
+	        } else if (strlen($query) > 128) {
+	            $this->hideAll();
+	        } else { 
+	        	$this->hideAll();
+	           	mysql_query("UPDATE `posts` SET `show` = 1 WHERE `text` LIKE '%$query%' OR `title` LIKE '%$query%'");	        
+	        } 
+	    } else {
+	        $this->hideAll();
+	    }
+	}
 }
 ?>

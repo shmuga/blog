@@ -20,31 +20,26 @@
 </head>
 <body>
 <div class="header">
-	<div class="container">
-		<div class="row">
-			<div class="span2 offset10 overall">
-				<a class="btn btn-success" href="index.php?r=Admin/login">admin page</a>
-			</div>
-		</div>
+	<div class="container">		
 		<div class="row">
 			<div class="span6 offset3 head_text torm">
-				<h2>My little blog</h2><h4> by Mark</h4>
+				<h2>Admin panel</h2>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="container">
 	<div class="row">
-		<div class="span10 offset1">					
-			<div class="navbar navbar-inverse">				
+		<div class="span10 offset1">		
+			<div class="navbar navbar-inverse">
 				<div class="navbar-inner">
 					<div class="container">
 						<ul class="nav">
 							<li><a href="index.php">Blog</a></li>
-							<li><a href="index.php?r=Site/topics">Topics</a></li>
-							<li><a href="index.php?r=Site/search">Search</a></li>
-							<!-- <li><a href="index.php?r=Site/about">About me</a></li>																	 -->
-						</ul>						
+							<li><a href="index.php?r=Admin/index">Edit posts</a></li>							
+							<li><a href="index.php?r=Admin/topics">Edit topics</a></li>							
+							<li><a href="index.php?r=Admin/logout">Exit</a></li>
+						</ul>
 					</div>
 				</div>
 			</div>
